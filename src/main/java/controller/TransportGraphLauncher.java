@@ -58,7 +58,6 @@ public class TransportGraphLauncher {
         dfpTest.printNodesInVisitedOrder();
         System.out.println();
 		*/
-		// Uncommented to test the BreadthFirstPath algorithm
 
 		BreadthFirstPath bfsTest = new BreadthFirstPath(transportGraph, "E", "J");
         bfsTest.search();
@@ -71,7 +70,7 @@ public class TransportGraphLauncher {
 		String[] purpleLineB = {"purple", "metro", "Grote Sluis", "Grootzeil", "Coltrane Cirkel", "Centrum", "Swingstraat"};
 		String[] greenLineB = {"green", "metro", "Ymeerdijk", "Trojelaan", "Steigerplein", "Swingstraat", "Bachgracht", "Nobelplein"};
 		String[] yellowLineB = {"yellow", "bus", "Grote Sluis", "Ymeerdijk", "Haven", "Nobelplein", "Violetplantsoen", "Oostvaarders", "Grote Sluis"};
-
+		
 		builder = new Builder();
 		System.out.println("");
 		builder.addLine(redLineB);
@@ -90,9 +89,32 @@ public class TransportGraphLauncher {
 		transportGraph = builder.build();
 		System.out.println(transportGraph.toString());
 
+		// Uncommented to test the DepthFirstPath algorithm
+		/*
+		DepthFirstPath dfpTest = new DepthFirstPath(transportGraph, "E", "J");
+        dfpTest.search();
+        System.out.println(dfpTest);
+        dfpTest.printNodesInVisitedOrder();
+        System.out.println();
+		*/
+
 		bfsTest = new BreadthFirstPath(transportGraph, "Steigerplein", "Grote Sluis");
         bfsTest.search();
         System.out.println(bfsTest);
         bfsTest.printNodesInVisitedOrder();
+
+		System.out.println("");
+
+		Double[] redLineWeight = {4.5, 4.7, 6.1, 3.5, 5.4, 5.6};
+		Double[] blueLineWeight = {6.0, 5.3, 5.1, 3.3};
+		Double[] purpleLineWeight = {6.2, 5.2, 3.8, 3.6};
+		Double[] greenLineWeight = {5.0, 3.7, 6.9, 3.9, 3.4};
+		Double[] yellowLineWeight = {26.0, 19.0, 37.0, 25.0, 22.0, 28.0};
+
+		transportGraph.addWeight(redLineB, redLineWeight);
+		transportGraph.addWeight(blueLineB, blueLineWeight);
+		transportGraph.addWeight(purpleLineB, purpleLineWeight);
+		transportGraph.addWeight(greenLineB, greenLineWeight);
+		transportGraph.addWeight(yellowLineB, yellowLineWeight);
 	}
 }

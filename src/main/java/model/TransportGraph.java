@@ -62,6 +62,21 @@ public class TransportGraph {
 		addEdge(getIndexOfStationByName(from.getStationName()), getIndexOfStationByName(to.getStationName()));
     }
 
+	/*
+	* The method gets the proper connection and sets the weight of that connection
+	*/
+	public void addWeight(String[] line, Double[] weight) {
+		int from;
+		int to;
+		for (int i = 0; i < weight.length; i++) {
+			from = getIndexOfStationByName(line[i + 2]);
+			to = getIndexOfStationByName(line[i + 3]);
+			connections[from][to].setWeight(weight[i]);
+			System.out.println("Set weight on connection: " + connections[from][to] + " : " + connections[from][to].getWeight());
+		}
+		
+	}
+
     public List<Integer> getAdjacentVertices(int index) {
         return adjacencyLists[index];
     }

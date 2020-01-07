@@ -23,6 +23,10 @@ public class Line {
         return stationsOnLine;
     }
 
+	public String getName() {
+		return name;
+	}
+
     @Override
     public boolean equals(Object other) {
         return this.name.equals(((Line) other).name);
