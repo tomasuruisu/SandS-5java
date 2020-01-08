@@ -34,7 +34,7 @@ public class DepthFirstPath extends AbstractPathSearch {
 
     /**
      * Computes a path between {@code s} and every other vertex in graph {@code G}.
-     * @param G the graph
+     * @param graph
 	 * @param start
 	 * @param end
      * @throws IllegalArgumentException unless {@code 0 <= s < V}
@@ -49,11 +49,27 @@ public class DepthFirstPath extends AbstractPathSearch {
     // depth first search
 	@Override
     public void search() {
-        
+        marked[startIndex] = true;
+        nodesVisited.add(graph.getStation(startIndex));
+        DepthFirstSearch(startIndex);
+        pathTo(endIndex);
     }
 
 	private void DepthFirstSearch(int vertex) {
-		
-	}
+        marked[vertex] = true;
+
+        for (int w : graph.getAdjacentVertices(vertex)) {
+            if (w == endIndex) {
+                nodesVisited.add(graph.getStation(endIndex));
+                break;
+            }
+            if (!marked[w] && !nodesVisited.contains(graph.getStation(endIndex))) {
+                edgeTo[w] = vertex;
+                nodesVisited.add(graph.getStation(w));
+                DepthFirstSearch(w);
+            }
+        }
+
+    }
 
 }

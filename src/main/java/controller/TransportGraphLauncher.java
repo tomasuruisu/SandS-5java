@@ -3,6 +3,7 @@ package controller;
 import java.text.DecimalFormat;
 
 import graphalgorithms.BreadthFirstPath;
+import graphalgorithms.DepthFirstPath;
 import graphalgorithms.DijkstraShortestPath;
 import graphalgorithms.A_Star;
 import model.TransportGraph;
@@ -57,13 +58,13 @@ public class TransportGraphLauncher {
 		System.out.println(transportGraph.toString());
 		
 		// Uncommented to test the DepthFirstPath algorithm
-		/*
+
 		DepthFirstPath dfpTest = new DepthFirstPath(transportGraph, "E", "J");
         dfpTest.search();
         System.out.println(dfpTest);
         dfpTest.printNodesInVisitedOrder();
         System.out.println();
-		*/
+
 
 		BreadthFirstPath bfsTest = new BreadthFirstPath(transportGraph, "E", "J");
         bfsTest.search();
@@ -95,9 +96,9 @@ public class TransportGraphLauncher {
 		transportGraph = builder.build();
 		System.out.println(transportGraph.toString());
 
-		// Uncommented to test the DepthFirstPath algorithm
+		// Op deze test loopt hij infinite?
 		/*
-		DepthFirstPath dfpTest = new DepthFirstPath(transportGraph, "E", "J");
+		dfpTest = new DepthFirstPath(transportGraph, "Steigerplein", "Grote Sluis");
         dfpTest.search();
         System.out.println(dfpTest);
         dfpTest.printNodesInVisitedOrder();
