@@ -1,8 +1,8 @@
 model\Station.class
 model\TransportGraph.class
-extra\Queue.class
 model\IndexMinPQ.class
 controller\TransportGraphLauncher.class
+graphalgorithms\DijkstraShortestPath.class
 model\Connection.class
 graphalgorithms\DepthFirstPath.class
 model\IndexMinPQ$HeapIterator.class

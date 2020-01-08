@@ -54,16 +54,21 @@ public class TransportGraph {
      * @param connection The edge as a connection between stations
      */
     public void addEdge(Connection connection) {
+		// add connection
 		Station from = connection.getFrom();
 		Station to = connection.getTo();
-		
-        connections[getIndexOfStationByName(from.getStationName())][getIndexOfStationByName(to.getStationName())] = connection;
-		connections[getIndexOfStationByName(to.getStationName())][getIndexOfStationByName(from.getStationName())] = connection;
 		addEdge(getIndexOfStationByName(from.getStationName()), getIndexOfStationByName(to.getStationName()));
+        connections[getIndexOfStationByName(from.getStationName())][getIndexOfStationByName(to.getStationName())] = connection;
+
+		// reverse the connection and add it as well
+		Connection connectionReverse = new Connection(to, from);
+		from = connectionReverse.getFrom();
+		to = connectionReverse.getTo();
+		connections[getIndexOfStationByName(from.getStationName())][getIndexOfStationByName(to.getStationName())] = connectionReverse;
     }
 
 	/*
-	* The method gets the proper connection and sets the weight of that connection
+	* The method gets the proper connection and sets the weight of that connection and the reverse connection
 	*/
 	public void addWeight(String[] line, Double[] weight) {
 		int from;
@@ -72,9 +77,10 @@ public class TransportGraph {
 			from = getIndexOfStationByName(line[i + 2]);
 			to = getIndexOfStationByName(line[i + 3]);
 			connections[from][to].setWeight(weight[i]);
+			connections[to][from].setWeight(weight[i]);
 			System.out.println("Set weight on connection: " + connections[from][to] + " : " + connections[from][to].getWeight());
+			System.out.println("Set weight on connection: " + connections[to][from] + " : " + connections[to][from].getWeight());
 		}
-		
 	}
 
     public List<Integer> getAdjacentVertices(int index) {

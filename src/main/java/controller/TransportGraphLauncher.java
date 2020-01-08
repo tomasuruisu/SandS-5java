@@ -1,12 +1,17 @@
 package controller;
 
+import java.text.DecimalFormat;
+
 import graphalgorithms.BreadthFirstPath;
+import graphalgorithms.DijkstraShortestPath;
 import model.TransportGraph;
 import model.TransportGraph.Builder;
 
 public class TransportGraphLauncher {
 
 	public static void main(String[] args) {
+		DecimalFormat df = new DecimalFormat("#.#");
+		
 		String[] redLine = {"red", "metro", "A", "B", "C", "D"};
 		String[] blueLine = {"blue", "metro", "E", "B", "F", "G"};
 		String[] greenLine = {"green", "metro", "H", "I", "C", "G", "J"};
@@ -116,5 +121,13 @@ public class TransportGraphLauncher {
 		transportGraph.addWeight(purpleLineB, purpleLineWeight);
 		transportGraph.addWeight(greenLineB, greenLineWeight);
 		transportGraph.addWeight(yellowLineB, yellowLineWeight);
+
+		System.out.println("");
+
+		DijkstraShortestPath dspTest = new DijkstraShortestPath(transportGraph, "Steigerplein", "Grote Sluis");
+		dspTest.search();
+		System.out.println(dspTest);
+		System.out.println("Total weight of path: " + df.format(dspTest.getTotalWeight()));
+		dspTest.printNodesInVisitedOrder();
 	}
 }
