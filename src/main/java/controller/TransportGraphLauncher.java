@@ -110,11 +110,11 @@ public class TransportGraphLauncher {
 
 		System.out.println("");
 
-		Double[] redLineWeight = {4.5, 4.7, 6.1, 3.5, 5.4, 5.6};
-		Double[] blueLineWeight = {6.0, 5.3, 5.1, 3.3};
-		Double[] purpleLineWeight = {6.2, 5.2, 3.8, 3.6};
-		Double[] greenLineWeight = {5.0, 3.7, 6.9, 3.9, 3.4};
-		Double[] yellowLineWeight = {26.0, 19.0, 37.0, 25.0, 22.0, 28.0};
+		double[] redLineWeight = {4.5, 4.7, 6.1, 3.5, 5.4, 5.6};
+		double[] blueLineWeight = {6.0, 5.3, 5.1, 3.3};
+		double[] purpleLineWeight = {6.2, 5.2, 3.8, 3.6};
+		double[] greenLineWeight = {5.0, 3.7, 6.9, 3.9, 3.4};
+		double[] yellowLineWeight = {26.0, 19.0, 37.0, 25.0, 22.0, 28.0};
 
 		transportGraph.addWeight(redLineB, redLineWeight);
 		transportGraph.addWeight(blueLineB, blueLineWeight);
@@ -129,5 +129,19 @@ public class TransportGraphLauncher {
 		System.out.println(dspTest);
 		System.out.println("Total weight of path: " + df.format(dspTest.getTotalWeight()));
 		dspTest.printNodesInVisitedOrder();
+
+		System.out.println("");
+
+		int[] redLineCoordinates = {14, 1, 12, 3, 10, 5, 8, 8, 6, 9, 3, 10, 0, 11};
+		int[] blueLineCoordinates = {9, 3, 7, 6, 6, 9, 5, 14};
+		int[] purpleLineCoordinates = {2, 3, 4, 6, 7, 6, 8, 8, 10, 9};
+		int[] greenLineCoordinates = {9, 0, 9, 3, 10, 5, 10, 9, 11, 11, 12, 13};
+		int[] yellowLineCoordinates = {2, 3, 9, 0, 14, 1, 12, 13, 5, 14, 0, 11, 2, 3};
+
+		transportGraph.addLocation(redLineB, redLineCoordinates);
+		transportGraph.addLocation(blueLineB, blueLineCoordinates);
+		transportGraph.addLocation(purpleLineB, purpleLineCoordinates);
+		transportGraph.addLocation(greenLineB, greenLineCoordinates);
+		transportGraph.addLocation(yellowLineB, yellowLineCoordinates);
 	}
 }

@@ -45,7 +45,6 @@ public class TransportGraph {
 		numberOfConnections++;
     }
 
-
     /**
      * Method to add an edge in the form of a connection between stations.
      * The method also adds the edge as an edge of indices by calling addEdge(int from, int to).
@@ -70,7 +69,7 @@ public class TransportGraph {
 	/*
 	* The method gets the proper connection and sets the weight of that connection and the reverse connection
 	*/
-	public void addWeight(String[] line, Double[] weight) {
+	public void addWeight(String[] line, double[] weight) {
 		int from;
 		int to;
 		for (int i = 0; i < weight.length; i++) {
@@ -80,6 +79,16 @@ public class TransportGraph {
 			connections[to][from].setWeight(weight[i]);
 			System.out.println("Set weight on connection: " + connections[from][to] + " : " + connections[from][to].getWeight());
 			System.out.println("Set weight on connection: " + connections[to][from] + " : " + connections[to][from].getWeight());
+		}
+	}
+
+	public void addLocation(String[] line, int[] coordinates) {
+		for (int i = 0; i < coordinates.length / 2; i++) {
+			int x = coordinates[i + i], y = coordinates[(i + i) + 1];
+			Location location = new Location(x, y);
+			Station station = stationList.get(getIndexOfStationByName(line[i + 2]));
+			station.setLocation(location);
+			System.out.println("Set Station location: " + station.getStationName() + "(" + location.x + ", " + location.y + ")");
 		}
 	}
 
