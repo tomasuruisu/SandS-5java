@@ -20,11 +20,11 @@ public class Location {
 		this.y = y;
 	}
 
-	public double travelTime(Location from, Location to) {
-		int x = from.x - to.x;
-		int y = from.y - to.y;
-		int difference = Math.abs(x * y);
-		return difference * travelTime;
+	public double travelTime(Location to) {
+		int xDiff = Math.abs(x - to.x);
+		int yDiff = Math.abs(y - to.y);
+		double difference = xDiff + yDiff;
+		return travelTime * difference;
 	}
 		
 	public int getX() {

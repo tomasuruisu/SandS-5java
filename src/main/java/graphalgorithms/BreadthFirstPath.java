@@ -47,7 +47,7 @@ public class BreadthFirstPath extends AbstractPathSearch {
     // breadth-first search from a single source
 	@Override
     public void search() {
-        LinkedList<Integer> q = new LinkedList<Integer>() {};
+        LinkedList<Integer> q = new LinkedList<>();
 		
         marked[startIndex] = true;
         q.add(startIndex);

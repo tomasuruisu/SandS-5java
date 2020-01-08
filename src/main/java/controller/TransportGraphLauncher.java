@@ -4,6 +4,7 @@ import java.text.DecimalFormat;
 
 import graphalgorithms.BreadthFirstPath;
 import graphalgorithms.DijkstraShortestPath;
+import graphalgorithms.A_Star;
 import model.TransportGraph;
 import model.TransportGraph.Builder;
 
@@ -143,5 +144,13 @@ public class TransportGraphLauncher {
 		transportGraph.addLocation(purpleLineB, purpleLineCoordinates);
 		transportGraph.addLocation(greenLineB, greenLineCoordinates);
 		transportGraph.addLocation(yellowLineB, yellowLineCoordinates);
+
+		System.out.println("");
+
+		A_Star aStarTest = new A_Star(transportGraph, "Steigerplein", "Grote Sluis");
+		aStarTest.search();
+		System.out.println(aStarTest);
+		System.out.println("Travel Time: " + df.format(aStarTest.getTravelTime()) + " minutes");
+		aStarTest.printNodesInVisitedOrder();
 	}
 }

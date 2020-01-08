@@ -60,6 +60,7 @@ public abstract class AbstractPathSearch {
         for (int x = vertex; x != startIndex; x = edgeTo[x]) {
             verticesInPath.push(x);
 		}
+		
         verticesInPath.push(startIndex);
 		for (int stationIndex: verticesInPath) {
 			Station station = graph.getStation(stationIndex);
@@ -82,7 +83,7 @@ public abstract class AbstractPathSearch {
 		for (int i = 0; i < nodesInPath.size() - 2; i++) {
 			boolean needTransfer = true;
 			for (Line line: nodesInPath.get(i).getLines()) {
-				if (nodesInPath.get(i + 2).hasLine(line)) {
+				if (nodesInPath.get(i + 1).hasLine(line) && nodesInPath.get(i + 2).hasLine(line)) {
 					// station that is 2 stations further still has the same line so no need to transfer
 					needTransfer = false;
 				}
