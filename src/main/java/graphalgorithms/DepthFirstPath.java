@@ -59,11 +59,7 @@ public class DepthFirstPath extends AbstractPathSearch {
         marked[vertex] = true;
 
         for (int w : graph.getAdjacentVertices(vertex)) {
-            if (w == endIndex) {
-                nodesVisited.add(graph.getStation(endIndex));
-                break;
-            }
-            if (!marked[w] && !nodesVisited.contains(graph.getStation(endIndex))) {
+            if (!marked[w]) {
                 edgeTo[w] = vertex;
                 nodesVisited.add(graph.getStation(w));
                 DepthFirstSearch(w);
