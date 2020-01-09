@@ -6,8 +6,8 @@ import graphalgorithms.BreadthFirstPath;
 import graphalgorithms.DepthFirstPath;
 import graphalgorithms.DijkstraShortestPath;
 import graphalgorithms.A_Star;
-import model.Station;
 import model.TransportGraph;
+import model.Station;
 import model.TransportGraph.Builder;
 
 public class TransportGraphLauncher {
@@ -97,19 +97,44 @@ public class TransportGraphLauncher {
 		transportGraph = builder.build();
 		System.out.println(transportGraph.toString());
 
-		// Op deze test loopt hij infinite?
-		/*
+		// A 4
+		System.out.println("DFP");
 		dfpTest = new DepthFirstPath(transportGraph, "Steigerplein", "Grote Sluis");
         dfpTest.search();
         System.out.println(dfpTest);
         dfpTest.printNodesInVisitedOrder();
         System.out.println();
-		*/
 
+		System.out.println("BFP");
 		bfsTest = new BreadthFirstPath(transportGraph, "Steigerplein", "Grote Sluis");
         bfsTest.search();
         System.out.println(bfsTest);
         bfsTest.printNodesInVisitedOrder();
+		System.out.println();
+
+		// A 5
+		System.out.println("Overview for shortest paths from every station to every station");
+		System.out.println("\nDepthFirst:");
+		for (Station station: transportGraph.getStationList()) {
+			for(int i = 0; i < transportGraph.getStationList().size(); i++) {
+				if (transportGraph.getStation(i) != station) {
+					dfpTest = new DepthFirstPath(transportGraph, station.getStationName(), transportGraph.getStation(i).getStationName());
+					dfpTest.search();
+					System.out.println(dfpTest);
+				}
+			}
+		}
+		System.out.println("\nBreadthFirst:");
+		for (Station station: transportGraph.getStationList()) {
+			for(int i = 0; i < transportGraph.getStationList().size(); i++) {
+				if (transportGraph.getStation(i) != station) {
+					bfsTest = new BreadthFirstPath(transportGraph, station.getStationName(), transportGraph.getStation(i).getStationName());
+					bfsTest.search();
+					System.out.println(bfsTest);
+				}
+			}
+		}
+
 
 		System.out.println("");
 
@@ -162,29 +187,55 @@ public class TransportGraphLauncher {
 
 		System.out.println("");
 
-		A_Star aStarTest = new A_Star(transportGraph, "Dukdalf", "Grote Sluis");
+		// C 5
+		A_Star aStarTest = new A_Star(transportGraph, "Steigerplein", "Grote Sluis");
 		aStarTest.search();
 		System.out.println(aStarTest);
 		aStarTest.printNodesInVisitedOrder();
 
-		System.out.println("");
-
 		// Dijkstra and A* search of every station to every other station
+		// C 6
+		System.out.println("Overview for shortest paths from every station to every station");
+		int transfers = 0;
+		int transferCompare = 0;
+		String winner;
+
+		// Dijkstra
+		System.out.println("\nDijkstra");
 		for (Station station: transportGraph.getStationList()) {
 			for(int i = 0; i < transportGraph.getStationList().size(); i++) {
 				if (transportGraph.getStation(i) != station) {
 					dspTest = new DijkstraShortestPath(transportGraph, station.getStationName(), transportGraph.getStation(i).getStationName());
 					dspTest.search();
-					
-
-					aStarTest = new A_Star(transportGraph, station.getStationName(), transportGraph.getStation(i).getStationName());
-					aStarTest.search();
-					//if (!dspTest.toString().equals(aStarTest.toString())) {
-						System.out.println("DIJKSTRA: " + dspTest);
-						System.out.println("A_STAR:   " + aStarTest);
-					//}
+					transferCompare += dspTest.getTransfers();
+					System.out.println(dspTest);
 				}
 			}
 		}
+
+		// A_Star
+		System.out.println("\nA_Star");
+		for (Station station: transportGraph.getStationList()) {
+			for(int i = 0; i < transportGraph.getStationList().size(); i++) {
+				if (transportGraph.getStation(i) != station) {
+					aStarTest = new A_Star(transportGraph, station.getStationName(), transportGraph.getStation(i).getStationName());
+					aStarTest.search();
+					transfers += aStarTest.getTransfers();
+					System.out.println(aStarTest);
+				}
+			}
+		}
+
+		// Compare to find the most efficient path
+		if (transfers < transferCompare) {
+			winner = "A_Star";
+		} else {
+			winner = "Dijkstra";
+		}
+
+		System.out.println("\nTotal of transfers with A_Star: " + transfers);
+		System.out.println("Total of transfers with Dijkstra: " + transferCompare);
+		System.out.println("The winner with the most efficient paths is: " + winner);
+
 	}
 }

@@ -76,4 +76,8 @@ public class DijkstraShortestPath extends AbstractPathSearch {
 		return pathWeight;
 	}
 
+	public int getTransfers() {
+		return transfers;
+	}
+
 }
