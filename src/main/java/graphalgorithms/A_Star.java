@@ -70,4 +70,8 @@ public class A_Star extends AbstractPathSearch {
 		return travelTime;
 	}
 
+	public int getTransfers() {
+		return transfers;
+	}
+
 }
