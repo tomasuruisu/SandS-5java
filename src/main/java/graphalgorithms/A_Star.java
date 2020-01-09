@@ -57,7 +57,7 @@ public class A_Star extends AbstractPathSearch {
 		int v = graph.getIndexOfStationByName(connection.getFrom().getStationName()), w = graph.
 				getIndexOfStationByName(connection.getTo().getStationName());
 		double cost = distTo[v] + connection.getWeight();
-		double fCost = cost + graph.getStation(v).getLocation().travelTime(graph.getStation(endIndex).getLocation());
+		double fCost = cost + graph.getStation(v).getLocation().travelTime(graph.getStation(w).getLocation());
 		if (distTo[w] > fCost) {
 			distTo[w] = fCost;
 			edgeTo[w] = v;
