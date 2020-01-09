@@ -6,6 +6,7 @@ import graphalgorithms.BreadthFirstPath;
 import graphalgorithms.DepthFirstPath;
 import graphalgorithms.DijkstraShortestPath;
 import graphalgorithms.A_Star;
+import model.Station;
 import model.TransportGraph;
 import model.TransportGraph.Builder;
 
@@ -112,6 +113,19 @@ public class TransportGraphLauncher {
 
 		System.out.println("");
 
+		// breadth first search of every station to every other station
+		for (Station station: transportGraph.getStationList()) {
+			for(int i = 0; i < transportGraph.getStationList().size(); i++) {
+				if (transportGraph.getStation(i) != station) {
+					bfsTest = new BreadthFirstPath(transportGraph, station.getStationName(), transportGraph.getStation(i).getStationName());
+					bfsTest.search();
+					System.out.println(bfsTest);
+				}
+			}
+		}
+
+		System.out.println("");
+
 		double[] redLineWeight = {4.5, 4.7, 6.1, 3.5, 5.4, 5.6};
 		double[] blueLineWeight = {6.0, 5.3, 5.1, 3.3};
 		double[] purpleLineWeight = {6.2, 5.2, 3.8, 3.6};
@@ -126,7 +140,7 @@ public class TransportGraphLauncher {
 
 		System.out.println("");
 
-		DijkstraShortestPath dspTest = new DijkstraShortestPath(transportGraph, "Steigerplein", "Grote Sluis");
+		DijkstraShortestPath dspTest = new DijkstraShortestPath(transportGraph, "Dukdalf", "Grote Sluis");
 		dspTest.search();
 		System.out.println(dspTest);
 		System.out.println("Total weight of path: " + df.format(dspTest.getTotalWeight()));
@@ -148,10 +162,29 @@ public class TransportGraphLauncher {
 
 		System.out.println("");
 
-		A_Star aStarTest = new A_Star(transportGraph, "Steigerplein", "Grote Sluis");
+		A_Star aStarTest = new A_Star(transportGraph, "Dukdalf", "Grote Sluis");
 		aStarTest.search();
 		System.out.println(aStarTest);
-		System.out.println("Travel Time: " + df.format(aStarTest.getTravelTime()) + " minutes");
 		aStarTest.printNodesInVisitedOrder();
+
+		System.out.println("");
+
+		// Dijkstra and A* search of every station to every other station
+		for (Station station: transportGraph.getStationList()) {
+			for(int i = 0; i < transportGraph.getStationList().size(); i++) {
+				if (transportGraph.getStation(i) != station) {
+					dspTest = new DijkstraShortestPath(transportGraph, station.getStationName(), transportGraph.getStation(i).getStationName());
+					dspTest.search();
+					
+
+					aStarTest = new A_Star(transportGraph, station.getStationName(), transportGraph.getStation(i).getStationName());
+					aStarTest.search();
+					//if (!dspTest.toString().equals(aStarTest.toString())) {
+						System.out.println("DIJKSTRA: " + dspTest);
+						System.out.println("A_STAR:   " + aStarTest);
+					//}
+				}
+			}
+		}
 	}
 }

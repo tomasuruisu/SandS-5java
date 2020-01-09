@@ -20,6 +20,7 @@ public class A_Star extends AbstractPathSearch {
 	private final double[] distTo;
 	private IndexMinPQ<Double> pq;
 	private double travelTime;
+	private double estimatedCost;
 
 	public A_Star(TransportGraph graph, String start, String end) {
 		super(graph, start, end);
@@ -43,6 +44,7 @@ public class A_Star extends AbstractPathSearch {
 			if (v == endIndex) {
 				pathTo(endIndex);
 				travelTime = distTo[endIndex];
+				break;
 			} else {
 				for (Integer vertex : graph.getAdjacentVertices(v)) {
 					relax(graph.getConnection(v, vertex));
@@ -55,13 +57,15 @@ public class A_Star extends AbstractPathSearch {
 	private void relax(Connection connection) {
 		int v = graph.getIndexOfStationByName(connection.getFrom().getStationName()), w = graph.
 				getIndexOfStationByName(connection.getTo().getStationName());
-		if (distTo[w] > distTo[v] + graph.getStation(w).getLocation().travelTime(graph.getStation(v).getLocation())) {
-			distTo[w] = distTo[v] + graph.getStation(w).getLocation().travelTime(graph.getStation(v).getLocation());
+		double cost = distTo[v] + connection.getWeight();
+		double fCost = cost + graph.getStation(v).getLocation().travelTime(graph.getStation(endIndex).getLocation());
+		if (distTo[w] > fCost) {
+			distTo[w] = fCost;
 			edgeTo[w] = v;
-			if (!pq.contains(w)) {
-				pq.insert(w, distTo[w]);
+			if (pq.contains(w)) {
+				pq.decreaseKey(w, distTo[w]);
 			} else {
-				pq.changeKey(w, distTo[w]);
+				pq.insert(w, distTo[w]);
 			}
 		}
 	}

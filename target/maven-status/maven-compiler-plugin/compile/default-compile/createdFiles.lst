@@ -1,13 +1,14 @@
 model\Station.class
 model\TransportGraph.class
 model\IndexMinPQ.class
+model\Location.class
 controller\TransportGraphLauncher.class
 graphalgorithms\DijkstraShortestPath.class
 model\Connection.class
 graphalgorithms\DepthFirstPath.class
 model\IndexMinPQ$HeapIterator.class
-graphalgorithms\BreadthFirstPath$1.class
 graphalgorithms\AbstractPathSearch.class
+graphalgorithms\A_Star.class
 model\TransportGraph$Builder.class
 graphalgorithms\BreadthFirstPath.class
 model\Line.class
