@@ -113,7 +113,7 @@ public class TransportGraphLauncher {
 		System.out.println();
 
 		// A 5
-		System.out.println("Overview for shortest paths from every station to every station");
+		System.out.println("\nOverview for shortest paths from every station to every station");
 		System.out.println("\nDepthFirst:");
 		for (Station station: transportGraph.getStationList()) {
 			for(int i = 0; i < transportGraph.getStationList().size(); i++) {
@@ -164,7 +164,7 @@ public class TransportGraphLauncher {
 		transportGraph.addWeight(yellowLineB, yellowLineWeight);
 
 		System.out.println("");
-
+		System.out.println("\nDijkstra");
 		DijkstraShortestPath dspTest = new DijkstraShortestPath(transportGraph, "Dukdalf", "Grote Sluis");
 		dspTest.search();
 		System.out.println(dspTest);
@@ -188,6 +188,7 @@ public class TransportGraphLauncher {
 		System.out.println("");
 
 		// C 5
+		System.out.println("\nA*");
 		A_Star aStarTest = new A_Star(transportGraph, "Steigerplein", "Grote Sluis");
 		aStarTest.search();
 		System.out.println(aStarTest);
@@ -195,7 +196,7 @@ public class TransportGraphLauncher {
 
 		// Dijkstra and A* search of every station to every other station
 		// C 6
-		System.out.println("Overview for shortest paths from every station to every station");
+		System.out.println("\nOverview for shortest paths from every station to every station");
 		int transfers = 0;
 		int transferCompare = 0;
 		String winner;
