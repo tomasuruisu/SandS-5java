@@ -15,7 +15,7 @@ public class DijkstraShortestPath extends AbstractPathSearch {
 	private IndexMinPQ<Double> pq;    // priority queue of vertices
 	private final int startIndex;
 	protected final int endIndex;
-	double pathWeight = 0.0;
+	private double pathWeight = 0.0;
 
 	public DijkstraShortestPath(TransportGraph graph, String start, String end) {
 		super(graph, start, end);
@@ -36,6 +36,7 @@ public class DijkstraShortestPath extends AbstractPathSearch {
 		while (!pq.isEmpty()) {
 			int v = pq.delMin();
 			nodesVisited.add(graph.getStation(v));
+			nodesVisitedAmount++;
 			for (Integer vertex : graph.getAdjacentVertices(v)) {	
 				relax(graph.getConnection(v, vertex));
 			}
@@ -76,8 +77,8 @@ public class DijkstraShortestPath extends AbstractPathSearch {
 		return pathWeight;
 	}
 
-	public int getTransfers() {
-		return transfers;
+	public int getNodesVisitedAmount() {
+		return nodesVisitedAmount;
 	}
 
 }

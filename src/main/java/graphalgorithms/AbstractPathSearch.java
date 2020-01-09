@@ -24,8 +24,7 @@ public abstract class AbstractPathSearch {
     protected TransportGraph graph;
     protected final int startIndex;
     protected final int endIndex;
-
-
+	protected int nodesVisitedAmount = 0;
 
     public AbstractPathSearch(TransportGraph graph, String start, String end) {
         startIndex = graph.getIndexOfStationByName(start);

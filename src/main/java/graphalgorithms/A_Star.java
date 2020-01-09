@@ -20,7 +20,6 @@ public class A_Star extends AbstractPathSearch {
 	private final double[] distTo;
 	private IndexMinPQ<Double> pq;
 	private double travelTime;
-	private double estimatedCost;
 
 	public A_Star(TransportGraph graph, String start, String end) {
 		super(graph, start, end);
@@ -41,9 +40,9 @@ public class A_Star extends AbstractPathSearch {
 		while (!pq.isEmpty()) {
 			int v = pq.delMin();
 			nodesVisited.add(graph.getStation(v));
+			nodesVisitedAmount++;
 			if (v == endIndex) {
 				pathTo(endIndex);
-				travelTime = distTo[endIndex];
 				break;
 			} else {
 				for (Integer vertex : graph.getAdjacentVertices(v)) {
@@ -74,8 +73,8 @@ public class A_Star extends AbstractPathSearch {
 		return travelTime;
 	}
 
-	public int getTransfers() {
-		return transfers;
+	public int getNodesVisitedAmount() {
+		return nodesVisitedAmount;
 	}
 
 }

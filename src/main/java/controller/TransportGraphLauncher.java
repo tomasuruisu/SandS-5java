@@ -197,8 +197,8 @@ public class TransportGraphLauncher {
 		// Dijkstra and A* search of every station to every other station
 		// C 6
 		System.out.println("\nOverview for shortest paths from every station to every station");
-		int transfers = 0;
-		int transferCompare = 0;
+		int nodesVisitedAmountDijkstra = 0;
+		int nodesVisitedAmountAStar = 0;
 		String winner;
 
 		// Dijkstra
@@ -208,7 +208,7 @@ public class TransportGraphLauncher {
 				if (transportGraph.getStation(i) != station) {
 					dspTest = new DijkstraShortestPath(transportGraph, station.getStationName(), transportGraph.getStation(i).getStationName());
 					dspTest.search();
-					transferCompare += dspTest.getTransfers();
+					nodesVisitedAmountDijkstra += dspTest.getNodesVisitedAmount();
 					System.out.println(dspTest);
 				}
 			}
@@ -221,21 +221,21 @@ public class TransportGraphLauncher {
 				if (transportGraph.getStation(i) != station) {
 					aStarTest = new A_Star(transportGraph, station.getStationName(), transportGraph.getStation(i).getStationName());
 					aStarTest.search();
-					transfers += aStarTest.getTransfers();
+					nodesVisitedAmountAStar += aStarTest.getNodesVisitedAmount();
 					System.out.println(aStarTest);
 				}
 			}
 		}
 
 		// Compare to find the most efficient path
-		if (transfers < transferCompare) {
-			winner = "A_Star";
+		if (nodesVisitedAmountAStar < nodesVisitedAmountDijkstra) {
+			winner = "A*";
 		} else {
 			winner = "Dijkstra";
 		}
 
-		System.out.println("\nTotal of transfers with A_Star: " + transfers);
-		System.out.println("Total of transfers with Dijkstra: " + transferCompare);
+		System.out.println("\nTotal nodes visited with A*: " + nodesVisitedAmountAStar);
+		System.out.println("Total nodes visited with Dijkstra: " + nodesVisitedAmountDijkstra);
 		System.out.println("The winner with the most efficient paths is: " + winner);
 
 	}
