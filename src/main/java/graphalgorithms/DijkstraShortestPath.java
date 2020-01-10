@@ -64,9 +64,7 @@ public class DijkstraShortestPath extends AbstractPathSearch {
 	 * Returns true if there is a path from the source vertex {@code s} to vertex {@code v}.
 	 *
 	 * @param v the destination vertex
-	 * @return {@code true} if there is a path from the source vertex
-	 * {@code s} to vertex {@code v}; {@code false} otherwise
-	 * @throws IllegalArgumentException unless {@code 0 <= v < V}
+	 * @return if there is a path from the source vertex
 	 */
 	@Override
 	public boolean hasPathTo(int v) {

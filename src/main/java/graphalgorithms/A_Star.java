@@ -11,7 +11,7 @@ import model.TransportGraph;
 
 /**
  *
- * @author Eigenaar
+ * @author Thomas & Donovan
  */
 public class A_Star extends AbstractPathSearch {
 
